@@ -1,0 +1,1453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Werribee WaterSafe</title>
+
+<style>
+:root {
+    --background: #06131f;
+    --panel: #0b1f30;
+    --panel-light: #102b40;
+    --text: #eaf7ff;
+    --muted: #9eb7c8;
+    --blue: #39d5ff;
+    --green: #55f0b0;
+    --yellow: #ffd166;
+    --red: #ff6b6b;
+}
+
+* {
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background:
+        radial-gradient(circle at 80% 0%, #103b57 0%, #06131f 40%, #030b12 100%);
+    color: var(--text);
+    line-height: 1.6;
+}
+
+/* NAVIGATION */
+
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    background: rgba(3, 11, 18, 0.85);
+    backdrop-filter: blur(15px);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 15px 25px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.logo span {
+    color: var(--blue);
+}
+
+nav a {
+    color: var(--muted);
+    text-decoration: none;
+    margin-left: 20px;
+    transition: 0.3s;
+}
+
+nav a:hover {
+    color: white;
+}
+
+/* HERO */
+
+.hero {
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+
+    padding: 120px 25px 70px;
+
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-container {
+    max-width: 1200px;
+    width: 100%;
+    margin: auto;
+
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 50px;
+    align-items: center;
+}
+
+.kicker {
+    color: var(--blue);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+h1 {
+    font-size: clamp(50px, 8vw, 105px);
+    line-height: 0.95;
+    margin: 20px 0;
+}
+
+.gradient {
+    background: linear-gradient(
+        90deg,
+        white,
+        var(--blue),
+        var(--green)
+    );
+
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.lead {
+    color: var(--muted);
+    font-size: 19px;
+    max-width: 650px;
+}
+
+.buttons {
+    margin-top: 30px;
+
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 13px 20px;
+    border-radius: 12px;
+
+    text-decoration: none;
+    color: white;
+
+    border: 1px solid rgba(255,255,255,0.1);
+
+    background: var(--panel);
+
+    transition: 0.3s;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+}
+
+.btn.primary {
+    background: var(--blue);
+    color: #021018;
+    font-weight: bold;
+}
+
+/* STATS */
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 12px;
+
+    margin-top: 35px;
+}
+
+.stat {
+    background: rgba(255,255,255,0.04);
+
+    border: 1px solid rgba(255,255,255,0.1);
+
+    border-radius: 15px;
+
+    padding: 16px;
+}
+
+.stat strong {
+    font-size: 25px;
+    display: block;
+}
+
+.stat small {
+    color: var(--muted);
+}
+
+/* WATER GRAPHIC */
+
+.water {
+    height: 350px;
+
+    position: relative;
+    overflow: hidden;
+
+    background: linear-gradient(
+        180deg,
+        #09263b,
+        #06374c
+    );
+
+    border-radius: 25px;
+
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.water::before {
+    content: "";
+
+    position: absolute;
+
+    width: 100%;
+    height: 100%;
+
+    background:
+        radial-gradient(
+            circle at 20% 30%,
+            rgba(255,255,255,0.2),
+            transparent 5%
+        ),
+        radial-gradient(
+            circle at 70% 20%,
+            rgba(255,255,255,0.15),
+            transparent 4%
+        );
+}
+
+.wave {
+    position: absolute;
+
+    bottom: -20px;
+
+    width: 150%;
+    height: 170px;
+
+    background: #087b86;
+
+    border-radius: 50%;
+
+    left: -25%;
+
+    transform: rotate(-5deg);
+}
+
+.wave.two {
+    bottom: -70px;
+    background: #0a5870;
+}
+
+.wave.three {
+    bottom: -120px;
+    background: #0c3c55;
+}
+
+/* GENERAL SECTIONS */
+
+section {
+    max-width: 1200px;
+    margin: auto;
+    padding: 100px 25px;
+}
+
+.section-header {
+    margin-bottom: 35px;
+}
+
+.eyebrow {
+    color: var(--green);
+
+    text-transform: uppercase;
+
+    letter-spacing: 2px;
+
+    font-size: 12px;
+
+    font-weight: bold;
+}
+
+h2 {
+    font-size: clamp(35px,5vw,55px);
+
+    line-height: 1;
+
+    margin: 10px 0;
+}
+
+.muted {
+    color: var(--muted);
+}
+
+/* CARDS */
+
+.grid {
+    display: grid;
+
+    grid-template-columns: repeat(3,1fr);
+
+    gap: 18px;
+}
+
+.card {
+    background:
+        linear-gradient(
+            145deg,
+            rgba(16,43,64,0.95),
+            rgba(7,24,37,0.95)
+        );
+
+    border: 1px solid rgba(255,255,255,0.1);
+
+    border-radius: 22px;
+
+    padding: 28px;
+
+    box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+
+    border-color: rgba(57,213,255,0.5);
+}
+
+.icon {
+    font-size: 35px;
+}
+
+.card h3 {
+    margin-bottom: 5px;
+}
+
+/* GLOBAL CONTEXT */
+
+.context {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 18px;
+}
+
+/* LEARNING LEVELS */
+
+.levels {
+    display: grid;
+
+    grid-template-columns: repeat(3,1fr);
+
+    gap: 18px;
+}
+
+.level-number {
+    color: var(--blue);
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    letter-spacing: 2px;
+}
+
+/* TIMELINE */
+
+.timeline {
+    margin-top: 45px;
+
+    border-left: 2px solid var(--blue);
+
+    padding-left: 35px;
+}
+
+.timeline-item {
+    position: relative;
+
+    margin-bottom: 35px;
+}
+
+.timeline-item::before {
+    content: "";
+
+    position: absolute;
+
+    left: -45px;
+
+    top: 5px;
+
+    width: 16px;
+
+    height: 16px;
+
+    border-radius: 50%;
+
+    background: var(--blue);
+
+    box-shadow: 0 0 20px var(--blue);
+}
+
+/* SWOT */
+
+.swot {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 18px;
+}
+
+.swot-card {
+    background: var(--panel);
+
+    border-radius: 20px;
+
+    padding: 25px;
+
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.strength {
+    border-top: 4px solid var(--green);
+}
+
+.weakness {
+    border-top: 4px solid var(--yellow);
+}
+
+.opportunity {
+    border-top: 4px solid var(--blue);
+}
+
+.threat {
+    border-top: 4px solid var(--red);
+}
+
+li {
+    color: var(--muted);
+
+    margin: 8px 0;
+}
+
+/* SUCCESS */
+
+.success-grid {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 18px;
+}
+
+.success {
+    background: var(--panel);
+
+    padding: 25px;
+
+    border-radius: 20px;
+
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.progress {
+    height: 9px;
+
+    background: #18364a;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+
+    margin: 12px 0;
+}
+
+.progress div {
+    height: 100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--blue),
+            var(--green)
+        );
+
+    border-radius: 20px;
+}
+
+/* QUIZ */
+
+.quiz {
+    max-width: 850px;
+
+    margin: auto;
+}
+
+.question {
+    padding: 22px 0;
+
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+label {
+    display: block;
+
+    margin: 10px 0;
+
+    color: var(--muted);
+
+    cursor: pointer;
+}
+
+.submit {
+    margin-top: 25px;
+
+    padding: 13px 20px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background: var(--blue);
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+#result {
+    margin-top: 20px;
+
+    font-weight: bold;
+}
+
+/* CTA */
+
+.cta {
+    background:
+        linear-gradient(
+            135deg,
+            #0e4059,
+            #083b35
+        );
+
+    border: 1px solid rgba(255,255,255,0.1);
+
+    border-radius: 30px;
+
+    padding: 55px;
+}
+
+/* FOOTER */
+
+footer {
+    text-align: center;
+
+    border-top: 1px solid rgba(255,255,255,0.1);
+
+    padding: 35px;
+
+    color: var(--muted);
+}
+
+/* MOBILE */
+
+@media(max-width:800px) {
+
+    nav a {
+        display: none;
+    }
+
+    .hero-container {
+        grid-template-columns: 1fr;
+    }
+
+    .grid,
+    .levels,
+    .context,
+    .swot,
+    .success-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .stats {
+        grid-template-columns: 1fr;
+    }
+
+    section {
+        padding: 70px 20px;
+    }
+
+    .cta {
+        padding: 35px 25px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVIGATION -->
+
+<nav>
+
+<div class="nav-container">
+
+<div class="logo">
+Werribee<span>WaterSafe</span>
+</div>
+
+<div>
+<a href="#why">Why</a>
+<a href="#context">Context</a>
+<a href="#program">Program</a>
+<a href="#swot">SWOT</a>
+<a href="#quiz">Quiz</a>
+</div>
+
+</div>
+
+</nav>
+
+
+<!-- HERO -->
+
+<header class="hero">
+
+<div class="hero-container">
+
+<div>
+
+<div class="kicker">
+Community Project • Werribee Youth
+</div>
+
+<h1>
+Water safety is a
+<span class="gradient">
+life skill.
+</span>
+</h1>
+
+<p class="lead">
+A youth-focused community project designed to make
+basic swimming, survival awareness and water-safety
+education easier to access.
+</p>
+
+<div class="buttons">
+
+<a class="btn primary" href="#program">
+Explore the program ↓
+</a>
+
+<a class="btn" href="#why">
+Why this matters
+</a>
+
+</div>
+
+<div class="stats">
+
+<div class="stat">
+<strong>357</strong>
+<small>
+Drowning deaths in the referenced project data
+</small>
+</div>
+
+<div class="stat">
+<strong>27%</strong>
+<small>
+Above the stated 10-year average
+</small>
+</div>
+
+<div class="stat">
+<strong>100%</strong>
+<small>
+Focus on youth education
+</small>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="water">
+
+<div class="wave"></div>
+<div class="wave two"></div>
+<div class="wave three"></div>
+
+</div>
+
+</div>
+
+</header>
+
+
+<!-- WHY -->
+
+<section id="why">
+
+<div class="section-header">
+
+<div class="eyebrow">
+01 / Community Need
+</div>
+
+<h2>
+Why this project?
+</h2>
+
+<p class="muted">
+Focused on young people in and around Werribee.
+</p>
+
+</div>
+
+
+<div class="grid">
+
+<div class="card">
+
+<div class="icon">
+🌊
+</div>
+
+<h3>
+Water is part of the community
+</h3>
+
+<p class="muted">
+Young people may spend time at pools, beaches and
+other waterways, making practical water-safety
+knowledge important.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<div class="icon">
+🎓
+</div>
+
+<h3>
+Education can reduce risk
+</h3>
+
+<p class="muted">
+Simple and repeated lessons can help young people
+recognise hazards and make safer decisions around water.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<div class="icon">
+🤝
+</div>
+
+<h3>
+Access matters
+</h3>
+
+<p class="muted">
+Free online resources could support families who find
+regular swimming programs difficult to access.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- GLOBAL CONTEXT -->
+
+<section id="context">
+
+<div class="section-header">
+
+<div class="eyebrow">
+02 / Global Context
+</div>
+
+<h2>
+Fairness & Development
+</h2>
+
+</div>
+
+
+<div class="context">
+
+<div class="card">
+
+<h3>
+Equal Opportunity
+</h3>
+
+<p class="muted">
+The project aims to give young people access to useful
+water-safety information regardless of their family's
+ability to pay for additional resources.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h3>
+Community Development
+</h3>
+
+<p class="muted">
+Building water awareness can strengthen confidence,
+responsibility and safety across the youth community.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h3>
+Scientific & Technical Innovation
+</h3>
+
+<p class="muted">
+Online videos and digital resources can make information
+available when it suits learners.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h3>
+Identities & Relationships
+</h3>
+
+<p class="muted">
+Learning water safety can help young people develop
+confidence and responsibility for themselves and others.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- PROGRAM -->
+
+<section id="program">
+
+<div class="section-header">
+
+<div class="eyebrow">
+03 / Proposed Solution
+</div>
+
+<h2>
+Learning Pathway
+</h2>
+
+<p class="muted">
+The program could be separated into different levels
+so young people can gradually develop their knowledge.
+</p>
+
+</div>
+
+
+<div class="levels">
+
+
+<div class="card">
+
+<div class="level-number">
+LEVEL 01
+</div>
+
+<h3>
+Water Awareness
+</h3>
+
+<p class="muted">
+Learn basic water-safety rules, recognise hazards and
+understand safer behaviour around pools and beaches.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<div class="level-number">
+LEVEL 02
+</div>
+
+<h3>
+Survival Basics
+</h3>
+
+<p class="muted">
+Introduce basic concepts such as floating, staying calm
+and getting help from a safe location.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<div class="level-number">
+LEVEL 03
+</div>
+
+<h3>
+Helping Others
+</h3>
+
+<p class="muted">
+Learn how to alert an adult or emergency services and
+why people should not put themselves in danger during a rescue.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="timeline">
+
+<div class="timeline-item">
+
+<h3>
+Research
+</h3>
+
+<p class="muted">
+Find out what young people already know about water
+safety and what information they need.
+</p>
+
+</div>
+
+
+<div class="timeline-item">
+
+<h3>
+Design
+</h3>
+
+<p class="muted">
+Create short online lessons with visuals, activities
+and quizzes.
+</p>
+
+</div>
+
+
+<div class="timeline-item">
+
+<h3>
+Test
+</h3>
+
+<p class="muted">
+Ask students and community members for feedback on
+clarity, usefulness and accessibility.
+</p>
+
+</div>
+
+
+<div class="timeline-item">
+
+<h3>
+Improve & Share
+</h3>
+
+<p class="muted">
+Improve the program and share it through suitable
+school and community channels.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- SUCCESS -->
+
+<section>
+
+<div class="section-header">
+
+<div class="eyebrow">
+04 / Success Measures
+</div>
+
+<h2>
+What could change?
+</h2>
+
+</div>
+
+
+<div class="success-grid">
+
+
+<div class="success">
+
+<h3>
+Awareness
+</h3>
+
+<div class="progress">
+<div style="width:85%"></div>
+</div>
+
+<p class="muted">
+More young people understand basic water-safety rules.
+</p>
+
+</div>
+
+
+<div class="success">
+
+<h3>
+Confidence
+</h3>
+
+<div class="progress">
+<div style="width:72%"></div>
+</div>
+
+<p class="muted">
+Learners feel more prepared around water.
+</p>
+
+</div>
+
+
+<div class="success">
+
+<h3>
+Accessibility
+</h3>
+
+<div class="progress">
+<div style="width:90%"></div>
+</div>
+
+<p class="muted">
+Free digital resources can be accessed outside scheduled lessons.
+</p>
+
+</div>
+
+
+<div class="success">
+
+<h3>
+Participation
+</h3>
+
+<div class="progress">
+<div style="width:68%"></div>
+</div>
+
+<p class="muted">
+Community activities encourage more young people to
+engage with water-safety education.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- SWOT -->
+
+<section id="swot">
+
+<div class="section-header">
+
+<div class="eyebrow">
+05 / Project Analysis
+</div>
+
+<h2>
+SWOT Analysis
+</h2>
+
+</div>
+
+
+<div class="swot">
+
+
+<div class="swot-card strength">
+
+<h3>
+Strengths
+</h3>
+
+<ul>
+
+<li>
+Schools and community groups can promote the program.
+</li>
+
+<li>
+Local pools and recreation facilities already exist.
+</li>
+
+<li>
+Young people can engage with digital content.
+</li>
+
+<li>
+Water safety is already recognised as important.
+</li>
+
+</ul>
+
+</div>
+
+
+<div class="swot-card weakness">
+
+<h3>
+Weaknesses
+</h3>
+
+<ul>
+
+<li>
+Some learners may lack basic swimming skills.
+</li>
+
+<li>
+Fear of water can affect participation.
+</li>
+
+<li>
+Online education cannot replace practical instruction.
+</li>
+
+<li>
+Some families may have limited access to facilities.
+</li>
+
+</ul>
+
+</div>
+
+
+<div class="swot-card opportunity">
+
+<h3>
+Opportunities
+</h3>
+
+<ul>
+
+<li>
+Partner with swimming teachers or aquatic centres.
+</li>
+
+<li>
+Run water-safety workshops.
+</li>
+
+<li>
+Use social media to spread awareness.
+</li>
+
+<li>
+Create different levels of learning.
+</li>
+
+</ul>
+
+</div>
+
+
+<div class="swot-card threat">
+
+<h3>
+Threats
+</h3>
+
+<ul>
+
+<li>
+Unsafe behaviour around water.
+</li>
+
+<li>
+Low attendance or engagement.
+</li>
+
+<li>
+Limited funding or equipment.
+</li>
+
+<li>
+Bad weather or limited facility access.
+</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- QUIZ -->
+
+<section id="quiz">
+
+<div class="section-header">
+
+<div class="eyebrow">
+06 / Interactive Learning
+</div>
+
+<h2>
+Water Safety Check
+</h2>
+
+</div>
+
+
+<div class="card quiz">
+
+<p class="muted">
+
+This quiz is for awareness only and does not replace
+qualified swimming, CPR or first-aid training.
+
+</p>
+
+
+<div class="question">
+
+<strong>
+1. What is a good first response if someone is in trouble in the water?
+</strong>
+
+<label>
+<input type="radio" name="q1" value="a">
+Enter the water immediately.
+</label>
+
+<label>
+<input type="radio" name="q1" value="b">
+Get help and alert an adult or emergency services while staying safe.
+</label>
+
+<label>
+<input type="radio" name="q1" value="c">
+Ignore it.
+</label>
+
+</div>
+
+
+<div class="question">
+
+<strong>
+2. Why is swimming ability important?
+</strong>
+
+<label>
+<input type="radio" name="q2" value="a">
+It can improve a person's ability to stay safer in water.
+</label>
+
+<label>
+<input type="radio" name="q2" value="b">
+It means someone can safely swim anywhere alone.
+</label>
+
+<label>
+<input type="radio" name="q2" value="c">
+It removes all risks.
+</label>
+
+</div>
+
+
+<div class="question">
+
+<strong>
+3. Can an online course replace supervised swimming lessons?
+</strong>
+
+<label>
+<input type="radio" name="q3" value="a">
+Yes.
+</label>
+
+<label>
+<input type="radio" name="q3" value="b">
+No. Digital learning can support education but does not replace practical instruction.
+</label>
+
+<label>
+<input type="radio" name="q3" value="c">
+Only for children.
+</label>
+
+</div>
+
+
+<button class="submit" onclick="checkQuiz()">
+Check Answers
+</button>
+
+<div id="result"></div>
+
+</div>
+
+</section>
+
+
+<!-- FINAL CTA -->
+
+<section>
+
+<div class="cta">
+
+<div class="eyebrow">
+Community Vision
+</div>
+
+<h2>
+A safer and more confident youth community.
+</h2>
+
+<p class="muted">
+The goal is not to replace professional swimming
+instruction. It is to make water-safety awareness
+easier to understand, easier to access and easier
+to remember.
+</p>
+
+<a class="btn primary" href="#program">
+View Learning Pathway ↑
+</a>
+
+</div>
+
+</section>
+
+
+<footer>
+
+Werribee WaterSafe • Youth Water Safety Community Project
+
+<br><br>
+
+<small>
+Educational concept website.
+Always follow qualified instructors, lifeguards
+and emergency-service advice.
+</small>
+
+</footer>
+
+
+<script>
+
+function checkQuiz() {
+
+    const answers = {
+        q1: "b",
+        q2: "a",
+        q3: "b"
+    };
+
+    let score = 0;
+
+    for (const question in answers) {
+
+        const selected =
+            document.querySelector(
+                'input[name="' + question + '"]:checked'
+            );
+
+        if (
+            selected &&
+            selected.value === answers[question]
+        ) {
+            score++;
+        }
+    }
+
+    const result =
+        document.getElementById("result");
+
+    if (score === 3) {
+
+        result.textContent =
+            "Excellent! You scored 3/3.";
+
+        result.style.color =
+            "#55f0b0";
+
+    } else {
+
+        result.textContent =
+            "You scored " + score +
+            "/3. Review the information and try again.";
+
+        result.style.color =
+            "#ffd166";
+    }
+}
+
+</script>
+
+</body>
+</html>
